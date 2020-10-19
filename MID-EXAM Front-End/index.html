@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Student List</title> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header class="main-header bg-warning text-dark shadow-lg">
+        <div class="container">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <a class="navbar-brand text-light" href="#"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                  </svg></i>Student Management Mini Application</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto ">
+                      <li class="nav-item active">
+                        <a class="nav-link text-light" href="#">Home <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-light" href="about.html">About</a>
+                      </li>
+                    </ul>
+                  </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="display-4 border-bottom p-3"><span class="text-warning">Student Management</span> <br/> Mini Application</h1>
+        <div style="display: flex; flex-direction: row; justify-content: center;">
+            <div style="flex-grow: 1;">
+                <h3> Add Student </h3>
+    
+                <button type="button" class="btn btn-warning shadow-sm" id="add_student_button" 
+                data-toggle="collapse" data-target="#student_form_collapsable" aria-expanded="false" 
+                aria-controls="student_form_collapsable" onclick="show_add_student_form_button()"> Show Form Add New Student </button>
+
+                <div class="collapse multi-collapse pt-4 mr-4" id="student_form_collapsable">
+                    <form>
+                        <div class="form-group">
+                            <label for="form_stud_id">Student ID (NIM)</label>
+                            <input type="text" class="form-control" id="form_stud_id"
+                             aria-describedby="form_stud_id_help" placeholder="105021810100">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form_stud_name">Full Name</label>
+                            <input type="text" class="form-control" id="form_stud_name"
+                             aria-describedby="form_stud_name_help" placeholder="Arianna Grande">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gender:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genderRadio" id="genderRadio1" value="Male" checked>
+                                <label class="form-check-label" for="genderRadio1">
+                                  Male
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genderRadio" id="genderRadio2" value="Female">
+                                <label class="form-check-label" for="genderRadio2">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p> Faculty </p>
+                            <select class="form-control" id="form_stud_faculty"
+                             onchange="form_stud_faculty_onchange()">
+                                <option>--- SELECT FACULTY ---</option>
+                                <option>Akademi Sekretari Manajemen Indonesia Klabat</option>
+                                <option>Fakultas Ekonomi dan Bisnis</option>
+                                <option>Fakultas Filsafat</option>
+                                <option>Fakultas Ilmu Komputer</option>
+                                <option>Fakultas Keguruan dan Ilmu Pendidikan</option>
+                                <option>Fakultas Keperawatan</option>
+                                <option>Fakultas Pertanian</option>
+                                <option>Pascasarjana</option>
+                            </select>
+                            
+                            <p> <br/>Program of Study </p>
+                            <select class="form-control" id="form_stud_programOfStudy">
+                                <option>--- SELECT PROGRAM OF STUDY ---</option>
+                            </select>
+                            <br/>
+                        </div>
+
+                        <button type="button" 
+                        class="btn btn-warning shadow-sm w-100" 
+                        id="form_add_student_button"
+                        onclick="add_student()"> Add Student </button>
+                    </form>
+                </div>
+            </div>
+            <div style="width: em; flex-shrink: 0;">
+                <h3> Filter Student By </h3>
+                
+                <p> Faculty </p>
+                <select class="form-control" id="selectByFaculty">
+                    <option>--- SELECT FACULTY ---</option>
+                    <option>Akademi Sekretari Manajemen Indonesia Klabat</option>
+                    <option>Fakultas Ekonomi dan Bisnis</option>
+                    <option>Fakultas Filsafat</option>
+                    <option>Fakultas Ilmu Komputer</option>
+                    <option>Fakultas Keguruan dan Ilmu Pendidikan</option>
+                    <option>Fakultas Keperawatan</option>
+                    <option>Fakultas Pertanian</option>
+                    <option>Pascasarjana</option>
+                </select>
+                <br/>
+                <button type="button" class="btn btn-warning shadow-sm w-100" id="show_student_button" onclick="search_byFaculty()"> Show Student </button>
+                
+                
+                <p> <br/>Program of Study </p>
+                <select class="form-control" id="selectByProgramOfStudy">
+                    <option>--- SELECT PROGRAM OF STUDY ---</option>
+                    <option>Agroteknologi</option>
+                    <option>Akuntansi</option>
+                    <option>Ilmu Filsafat</option>
+                    <option>Informatika</option>
+                    <option>Keperawatan</option>
+                    <option>Magister Manajemen</option>
+                    <option>Magister Teologi</option>
+                    <option>Manajemen</option>
+                    <option>Pendidikan Agama</option>
+                    <option>Pendidikan Bahasa Inggris</option>
+                    <option>Pendidikan Ekonomi</option>
+                    <option>Pendidikan Luar Sekolah</option>
+                    <option>Profesi Ners</option>
+                    <option>Sekretari (D3)</option>
+                    <option>Sistem Informasi</option>
+                </select>
+                <br/>
+                <button type="button" class="btn btn-warning shadow-sm w-100" id="show_student_button" onclick="search_byProgramOfStudy()"> Show Student </button>
+            </div>
+        </div>
+    </div>
+    <div class="container border-top mt-3">
+        <div style="display: flex; justify-content: center; flex-direction: column; text-align: center;">
+            <h1 class="display-4 mt-4">Our Student</h1>
+            <input class="form-control" id="form_search_student" type="text" placeholder="Search students by name..." oninput="search_student()">
+            <table class="table mt-3" id="student_table_data">
+                <thead>
+                  <tr>
+                    <th scope="col">Student ID (NIM)</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Faculty</th>
+                    <th scope="col">Program of Study</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="student_table_data_body">
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small bg-warning text-dark" >
+  
+        <div class="text-center text-light py-3">
+        <p> Tarisha Rehuel Jenena Hamzah © 2020 </p>
+        </div>
+  
+    </footer>
+  <!-- Footer -->
+
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <script src="main.js"></script>
+
+</body>
+</html>
