@@ -27,7 +27,7 @@ let student_data = [
         "fullName" : "Endro Puspito",
         "gender" : "Male",
         "faculty" : "Fakultas Ekonomi dan Bisnis",
-        "programOfStudy" : "Management"
+        "programOfStudy" : "Manajemen"
     },
     {
         "NIM" : "105021810048",
@@ -106,6 +106,7 @@ function refresh_student_table_data() {
     }
 }
 
+// Add Student
 function add_student() {
     let NIM = document.getElementById("form_stud_id").value;
     let fullName = document.getElementById("form_stud_name").value;
@@ -131,8 +132,22 @@ function add_student() {
     });
 
     refresh_student_table_data();
+
+    document.getElementById("form_stud_id").value = "";
+    document.getElementById("form_stud_name").value = "";
+    document.getElementById("form_stud_faculty").selectedIndex = 0;
+    document.getElementById("form_stud_programOfStudy").selectedIndex = -1;
+    
+     {
+        let form_stud_programOfStudy = document.getElementById("form_stud_programOfStudy");
+        form_stud_programOfStudy.textContent = ''; //kill all children element sadisticialy
+        form_stud_programOfStudy.appendChild((() => {let x = document.createElement("option"); x.innerText = "--- SELECT PROGRAM OF STUDY ---"; return x;})());
+        form_stud_programOfStudy.selectedIndex = 0;
+    }
+    
 }
 
+// search student
 function search_student() {
     while(student_table_data.children.length > 0) {
         student_table_data.removeChild(student_table_data.children[0]);
@@ -175,6 +190,7 @@ function search_student() {
     }
 }
 
+// search by faculty
 function search_byFaculty() {
     let selectByFaculty = document.getElementById("selectByFaculty");
     selectByFaculty = selectByFaculty.options[selectByFaculty.selectedIndex];
@@ -220,6 +236,7 @@ function search_byFaculty() {
     }
 }
 
+// search by program of study
 function search_byProgramOfStudy() {
     let selectByProgramOfStudy = document.getElementById("selectByProgramOfStudy");
     selectByProgramOfStudy = selectByProgramOfStudy.options[selectByProgramOfStudy.selectedIndex];
@@ -265,6 +282,7 @@ function search_byProgramOfStudy() {
     }
 }
 
+// show add student from button
 function show_add_student_form_button() {
     let button = document.getElementById("add_student_button");
 
@@ -341,7 +359,3 @@ function form_stud_faculty_onchange() {
 }
 
 refresh_student_table_data();
-document.getElementById("form_stud_id").value = "";
-document.getElementById("form_stud_name").value = "";
-document.getElementById("form_stud_faculty").selectedIndex = 0;
-document.getElementById("form_stud_programOfStudy").selectedIndex = -1;
